@@ -1,0 +1,50 @@
+# Unity generated folders
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Ll]ogs/
+[Mm]emoryCaptures/
+[Aa]ssets/StreamingAssets/
+[Uu]serSettings/
+
+# Auto-generated VS/JetBrains Rider project files
+*.csproj
+*.sln
+*.user
+*.userprefs
+.vscode/
+.idea/
+
+# Unity cache and temp files
+*.pidb
+*.pdb
+*.mdb
+*.unityproj
+*.suo
+*.tmp
+*.user
+*.booproj
+*.svd
+*.orig
+*.bak
+*.old
+*.log
+
+#UnityCloud files
+ignore.conf
+
+# Build results
+*.apk
+*.aab
+*.unitypackage
+
+# Crashlytics generated files
+crashlytics-build.properties
+
+# Packed files
+*.zip
+*.rar
+*.7z
+*.gz
+*.tar

@@ -1,0 +1,4 @@
+repository "MobilePlatformer@Devouver@cloud"
+  path "/"
+    br "/main"
+    co "/main"
