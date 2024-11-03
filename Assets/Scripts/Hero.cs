@@ -9,16 +9,24 @@ public class Hero : MonoBehaviour
     [SerializeField] private float jumpForce = 10f;
 
     private Rigidbody2D rb;
+    private Animator animator;
     private SpriteRenderer sprite;
     private CapsuleCollider2D collider;
     private bool isGrounded = false;
     private float heroHeight;
     private float heroWidth;
 
+    private States State
+    {
+        get { return (States)animator.GetInteger("state"); }
+        set { animator.SetInteger("state", (int) value); }
+    }
+
     // Start is called before the first frame update
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
         collider = GetComponentInChildren<CapsuleCollider2D>();
         heroWidth = collider.size.x;
@@ -32,6 +40,16 @@ public class Hero : MonoBehaviour
     // Update is called once per frame
     private  void Update()
     {
+        if(lives <= 0) {
+            State = States.death;
+            return;
+        }
+        if (isGrounded) {
+            State = States.idle;
+        }
+        if (Input.GetKeyDown(KeyCode.H)) {
+            lives--;
+        }
         // Бег
         if (Input.GetButton("Horizontal")) {
             Run();
@@ -50,10 +68,12 @@ public class Hero : MonoBehaviour
 
     private void Run()
     {
+        if (isGrounded) {
+            State = States.run;
+        }
+        
         Vector3 dir = transform.right * Input.GetAxis("Horizontal");
-
         transform.position = Vector3.MoveTowards(transform.position, transform.position + dir, speed * Time.deltaTime);
-
         sprite.flipX = dir.x < 0.0f;
     }
 
@@ -64,6 +84,10 @@ public class Hero : MonoBehaviour
     private void CheckGround() {
         Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, 0.3f);
         isGrounded = collider.Length > 1;
+
+        if (!isGrounded) {
+            State = States.jump;
+        }
     }
 
     private void Squat(bool down) {
@@ -73,5 +97,12 @@ public class Hero : MonoBehaviour
             collider.size = new Vector2(heroWidth, heroHeight);
         }
     }
+}
+
+public enum States {
+    idle,
+    jump,
+    run,
+    death
 }
 
