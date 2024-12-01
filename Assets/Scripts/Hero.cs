@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Hero : MonoBehaviour
 {
-    [SerializeField] private float speed = 3f;
-    [SerializeField] private int lives = 3;
-    [SerializeField] private float jumpForce = 10f;
+    [SerializeField] private float speed = 3f; // Скорость движения
+    [SerializeField] private int health = 5; // Текущее здоровье
+    [SerializeField] private float jumpForce = 10f; // Сила прыжка
+
+    [SerializeField] private Image[] hearts;
+    [SerializeField] private Sprite activeHeart;
+    [SerializeField] private Sprite emptyHeart;
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -15,6 +20,7 @@ public class Hero : MonoBehaviour
     private bool isGrounded = false;
     private float heroHeight;
     private float heroWidth;
+    private int lives;
 
     private States State
     {
@@ -31,6 +37,7 @@ public class Hero : MonoBehaviour
         collider = GetComponentInChildren<CapsuleCollider2D>();
         heroWidth = collider.size.x;
         heroHeight = collider.size.y;
+        lives = health;
     }
 
     private void FixedUpdate() {
@@ -40,6 +47,9 @@ public class Hero : MonoBehaviour
     // Update is called once per frame
     private  void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R)) {
+            lives = health;
+        }
         if(lives <= 0) {
             State = States.death;
             return;
@@ -47,23 +57,24 @@ public class Hero : MonoBehaviour
         if (isGrounded) {
             State = States.idle;
         }
-        if (Input.GetKeyDown(KeyCode.H)) {
+        if (Input.GetKeyDown(KeyCode.Q)) {
             lives--;
         }
-        // Бег
-        if (Input.GetButton("Horizontal")) {
+        if (Input.GetButton("Horizontal")) { // Бег
             Run();
         }
-        // Приседания
-        if (Input.GetButton("Vertical")) {
-            Squat(true);
-        } else {
-            Squat(false);
-        }
-        // Прыжки
         if (isGrounded && Input.GetButtonDown("Jump")) {
             Jump();
         }
+        
+        for (int i = 0; i < hearts.Length; i++) {
+            if(i < lives) {
+                hearts[i].sprite = activeHeart;
+                hearts[i].enabled = true;
+            } else {
+                hearts[i].sprite = emptyHeart;
+            }
+        } 
     }
 
     private void Run()
