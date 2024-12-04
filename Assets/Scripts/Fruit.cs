@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -30,6 +31,7 @@ public class Fruit : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("Player") && !disappear) {
             disappear = true;
+            Debug.Log("Pick up");
             Score.score += 1;
             animator.SetInteger("state", 0);
         }
