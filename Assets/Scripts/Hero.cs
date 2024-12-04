@@ -95,7 +95,7 @@ public class Hero : MonoBehaviour
     }
 
     private void CheckGround() {
-        Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, 0.3f);
+        Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, 0.1f);
         isGrounded = collider.Length > 1;
 
         if (!isGrounded) {
