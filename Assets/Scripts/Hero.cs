@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,7 @@ public class Hero : MonoBehaviour
     private float heroHeight;
     private float heroWidth;
     private int lives;
+    public Joystick joystick;
 
     private States State
     {
@@ -60,10 +62,10 @@ public class Hero : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q)) {
             lives--;
         }
-        if (Input.GetButton("Horizontal")) { // Бег
+        if (joystick.Horizontal != 0) { // Бег
             Run();
         }
-        if (isGrounded && Input.GetButtonDown("Jump")) {
+        if (isGrounded && joystick.Vertical > 0.5f) {
             Jump();
         }
         
@@ -83,13 +85,13 @@ public class Hero : MonoBehaviour
             State = States.run;
         }
         
-        Vector3 dir = transform.right * Input.GetAxis("Horizontal");
+        Vector3 dir = transform.right * joystick.Horizontal;
         transform.position = Vector3.MoveTowards(transform.position, transform.position + dir, speed * Time.deltaTime);
         sprite.flipX = dir.x < 0.0f;
     }
 
     private void Jump() {
-        rb.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
+        rb.velocity = Vector2.up * jumpForce;
     }
 
     private void CheckGround() {
