@@ -22,7 +22,7 @@ public class ItemsController : MonoBehaviour
         }
 
         // Назначаем спрайт и увеличиваем индекс
-        items[index].sprite = sprite;
+        items[index].sprite = sprite1;
         items[index].enabled = true;
         index++;
     }
