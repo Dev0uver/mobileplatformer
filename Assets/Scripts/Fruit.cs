@@ -8,12 +8,15 @@ public class Fruit : MonoBehaviour
 {
     // Start is called before the first frame update
     private Animator animator;
+
+    private SpriteRenderer spriteRenderer;
     private int fruitId;
     private bool disappear = false;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         System.Random rnd = new System.Random();
         fruitId  = rnd.Next(1, 9);
         animator.SetInteger("state", fruitId);
@@ -31,9 +34,9 @@ public class Fruit : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("Player") && !disappear) {
             disappear = true;
-            Debug.Log("Pick up");
             Score.score += 1;
             animator.SetInteger("state", 0);
+            spriteRenderer.sprite = null;
         }
     }
 }

@@ -19,6 +19,7 @@ public class Key : MonoBehaviour
     {
         if (isPlayerInRange && !disappear)
         {
+            Debug.Log("Trying to pick up " + itemSprite.name);
             disappear = true;
             anim.SetBool("disappear", disappear);
 
@@ -42,6 +43,7 @@ public class Key : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = true;
+            Debug.Log("Player in range " + itemSprite.name);
         }
     }
 
@@ -50,6 +52,7 @@ public class Key : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInRange = false;
+            Debug.Log("Player out of range " + itemSprite.name);
         }
     }
 }
