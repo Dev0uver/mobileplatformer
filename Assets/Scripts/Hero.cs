@@ -23,12 +23,14 @@ public class Hero : MonoBehaviour
     private float heroWidth;
     private int lives;
     public Joystick joystick;
+    private UIManager uiManager;
 
     private States State
     {
         get { return (States)animator.GetInteger("state"); }
         set { animator.SetInteger("state", (int) value); }
     }
+
 
     // Start is called before the first frame update
     private void Start()
@@ -40,6 +42,8 @@ public class Hero : MonoBehaviour
         heroWidth = collider.size.x;
         heroHeight = collider.size.y;
         lives = health;
+
+        uiManager = FindObjectOfType<UIManager>();
     }
 
     private void FixedUpdate() {
@@ -123,6 +127,12 @@ public class Hero : MonoBehaviour
         {
             lives--;
         }
+    }
+
+    public void GameOver()
+    {
+        uiManager.GameOver();
+        return;
     }
 }
 
