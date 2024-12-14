@@ -48,6 +48,12 @@ TagManager:
   - name: Main Scene
     uniqueID: 1066938835
     locked: 0
+  - name: Items
+    uniqueID: 277543115
+    locked: 0
   - name: Player
     uniqueID: 2407534677
+    locked: 0
+  - name: UI
+    uniqueID: 852107869
     locked: 0

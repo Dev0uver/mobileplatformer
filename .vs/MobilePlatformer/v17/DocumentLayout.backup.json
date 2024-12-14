@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "D:\\Projects\\Unity projects\\mobileplatformer\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{9A4FD264-0E17-0F2D-A416-462FA4B54582}|Assembly-CSharp.csproj|d:\\projects\\unity projects\\mobileplatformer\\assets\\scripts\\saw.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A4FD264-0E17-0F2D-A416-462FA4B54582}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\saw.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{9A4FD264-0E17-0F2D-A416-462FA4B54582}|Assembly-CSharp.csproj|D:\\Projects\\Unity projects\\mobileplatformer\\assets\\scripts\\hero.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9A4FD264-0E17-0F2D-A416-462FA4B54582}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\hero.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9A4FD264-0E17-0F2D-A416-462FA4B54582}|Assembly-CSharp.csproj|d:\\projects\\unity projects\\mobileplatformer\\assets\\crystalframework\\utility\\safearea.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9A4FD264-0E17-0F2D-A416-462FA4B54582}|Assembly-CSharp.csproj|solutionrelative:assets\\crystalframework\\utility\\safearea.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9A4FD264-0E17-0F2D-A416-462FA4B54582}|Assembly-CSharp.csproj|D:\\Projects\\Unity projects\\mobileplatformer\\assets\\camerasizeadjust.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9A4FD264-0E17-0F2D-A416-462FA4B54582}|Assembly-CSharp.csproj|solutionrelative:assets\\camerasizeadjust.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A4FD264-0E17-0F2D-A416-462FA4B54582}|Assembly-CSharp.csproj|D:\\Projects\\Unity projects\\mobileplatformer\\assets\\crystalframework\\utility\\safearea.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A4FD264-0E17-0F2D-A416-462FA4B54582}|Assembly-CSharp.csproj|solutionrelative:assets\\crystalframework\\utility\\safearea.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,20 +26,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "Saw.cs",
+              "DocumentMoniker": "D:\\Projects\\Unity projects\\mobileplatformer\\Assets\\Scripts\\Saw.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Saw.cs",
+              "ToolTip": "D:\\Projects\\Unity projects\\mobileplatformer\\Assets\\Scripts\\Saw.cs*",
+              "RelativeToolTip": "Assets\\Scripts\\Saw.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-14T11:31:28.744Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "SafeArea.cs",
               "DocumentMoniker": "D:\\Projects\\Unity projects\\mobileplatformer\\Assets\\CrystalFramework\\Utility\\SafeArea.cs",
               "RelativeDocumentMoniker": "Assets\\CrystalFramework\\Utility\\SafeArea.cs",
               "ToolTip": "D:\\Projects\\Unity projects\\mobileplatformer\\Assets\\CrystalFramework\\Utility\\SafeArea.cs",
               "RelativeToolTip": "Assets\\CrystalFramework\\Utility\\SafeArea.cs",
-              "ViewState": "AgIAALcAAAAAAAAAAABRwLoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAALoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-01T18:43:50.695Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-01T18:43:50.695Z"
             },
             {
               "$type": "Document",
@@ -51,16 +67,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Hero.cs",
               "DocumentMoniker": "D:\\Projects\\Unity projects\\mobileplatformer\\Assets\\Scripts\\Hero.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Hero.cs",
               "ToolTip": "D:\\Projects\\Unity projects\\mobileplatformer\\Assets\\Scripts\\Hero.cs",
               "RelativeToolTip": "Assets\\Scripts\\Hero.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAgwC4AAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAACcAAAAAAAAAAAAowDcAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-12T17:48:48.887Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-12T17:48:48.887Z"
             }
           ]
         }
