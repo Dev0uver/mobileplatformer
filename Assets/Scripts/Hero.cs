@@ -47,12 +47,25 @@ public class Hero : MonoBehaviour
     }
 
     // Update is called once per frame
-    private  void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R)) {
             lives = health;
         }
-        if(lives <= 0) {
+
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if (i < lives)
+            {
+                hearts[i].sprite = activeHeart;
+                hearts[i].enabled = true;
+            }
+            else
+            {
+                hearts[i].sprite = emptyHeart;
+            }
+        }
+        if (lives <= 0) {
             State = States.death;
             return;
         }
@@ -60,7 +73,7 @@ public class Hero : MonoBehaviour
             State = States.idle;
         }
         if (Input.GetKeyDown(KeyCode.Q)) {
-            lives--;
+            TakeDamage();
         }
         if (joystick.Horizontal != 0) { // Бег
             Run();
@@ -69,14 +82,7 @@ public class Hero : MonoBehaviour
             Jump();
         }
         
-        for (int i = 0; i < hearts.Length; i++) {
-            if(i < lives) {
-                hearts[i].sprite = activeHeart;
-                hearts[i].enabled = true;
-            } else {
-                hearts[i].sprite = emptyHeart;
-            }
-        } 
+        
     }
 
     private void Run()
@@ -108,6 +114,14 @@ public class Hero : MonoBehaviour
             collider.size = new Vector2(heroWidth, heroHeight / 2);
         } else {
             collider.size = new Vector2(heroWidth, heroHeight);
+        }
+    }
+
+    public void TakeDamage()
+    {
+        if (lives > 0)
+        {
+            lives--;
         }
     }
 }
