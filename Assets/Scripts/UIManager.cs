@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour
     private Image image;
     private Text levelNumber;
 
-    private int index = 1;
+    private static int index = 1;
 
     
     void Start()
@@ -162,6 +162,13 @@ public class UIManager : MonoBehaviour
     public void PlayLevel()
     {
         SceneManager.LoadScene(index);
+        ResetValues();
+    }
+
+    public void NextLevel()
+    {
+        index++;
+        PlayLevel();
     }
     #endregion
 }
