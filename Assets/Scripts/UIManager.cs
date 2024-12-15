@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
 
     public Sprite[] levelPreviews;
     private Image image;
+    private Text levelNumber;
 
     private int index = 1;
 
@@ -38,6 +39,7 @@ public class UIManager : MonoBehaviour
         {
             levelSelectionScreen.SetActive(false);
             image = levelSelectionScreen.transform.GetChild(levelSelectionScreen.transform.childCount - 1).GetComponent<Image>();
+            levelNumber = levelSelectionScreen.transform.GetChild(levelSelectionScreen.transform.childCount - 2).GetComponent<Text>();
         }
     }
 
@@ -115,6 +117,8 @@ public class UIManager : MonoBehaviour
     #region LevelSelection()
     public void OpenLevelSelection()
     {
+        image.sprite = levelPreviews[index - 1];
+        levelNumber.text = index.ToString();
         levelSelectionScreen.SetActive(true);
         SceneManager.GetSceneAt(index);
     }
@@ -136,6 +140,7 @@ public class UIManager : MonoBehaviour
         else
         {
             image.sprite = levelPreviews[index - 1];
+            levelNumber.text = index.ToString();
         }
     }
 
@@ -150,6 +155,7 @@ public class UIManager : MonoBehaviour
         else
         {
             image.sprite = levelPreviews[index - 1];
+            levelNumber.text = index.ToString();
         }
     }
 
