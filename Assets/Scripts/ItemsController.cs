@@ -4,7 +4,14 @@ using UnityEngine.UI;
 public class ItemsController : MonoBehaviour
 {
     [SerializeField] private Image[] items; // Ссылки на UI элементы для отображения спрайтов
-    private static int index = 0;
+    public static int index = 0;
+
+    private Finish finish;
+
+    private void Start()
+    {
+        finish = FindObjectOfType<Finish>();
+    }
 
     public void AddItem(Sprite sprite)
     {
@@ -24,5 +31,10 @@ public class ItemsController : MonoBehaviour
         items[index].sprite = sprite;
         items[index].enabled = true;
         index++;
+
+        if (index >= 3 && Finish.isClosed)
+        {
+           finish.OpenFinish();
+        }
     }
 }

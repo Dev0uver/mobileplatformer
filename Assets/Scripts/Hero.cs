@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +23,7 @@ public class Hero : MonoBehaviour
     private float heroHeight;
     private float heroWidth;
     private int lives;
+    private string[] ignoredColliderTags = new string[] { "Fruit", "Trap", "Item" };
     public Joystick joystick;
     private UIManager uiManager;
 
@@ -53,10 +55,6 @@ public class Hero : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R)) {
-            lives = health;
-        }
-
         for (int i = 0; i < hearts.Length; i++)
         {
             if (i < lives)
@@ -75,9 +73,6 @@ public class Hero : MonoBehaviour
         }
         if (isGrounded) {
             State = States.idle;
-        }
-        if (Input.GetKeyDown(KeyCode.Q)) {
-            TakeDamage();
         }
         if (joystick.Horizontal != 0) { // Бег
             Run();
@@ -106,6 +101,7 @@ public class Hero : MonoBehaviour
 
     private void CheckGround() {
         Collider2D[] collider = Physics2D.OverlapCircleAll(transform.position, 0.1f);
+        collider = collider.Where(c => !ignoredColliderTags.Contains(c.tag)).ToArray();
         isGrounded = collider.Length > 1;
 
         if (!isGrounded) {
