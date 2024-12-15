@@ -102,7 +102,6 @@ public class UIManager : MonoBehaviour
     #region LevelComplete
     public void LevelComplete()
     {
-        GameObject object123421 = levelCompleteScreen.transform.GetChild(2).gameObject;
         Text timeValueText = levelCompleteScreen.transform.GetChild(2).gameObject.transform.GetChild(1).GetComponent<Text>();
         Text scoreValueText = levelCompleteScreen.transform.GetChild(2).gameObject.transform.GetChild(3).GetComponent<Text>();
         timeValueText.text = Score.parseTime();
