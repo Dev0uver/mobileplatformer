@@ -7,8 +7,9 @@ using UnityEngine.Networking;
 
 public class PlatformerApi : MonoBehaviour
 {
-    private static string url = "http://localhost:8080/api";
-    public static string token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBtYWlsLnJ1IiwiaWF0IjoxNzM0MTkzNjkyLCJleHAiOjE3MzY3ODU2OTJ9.u7uJn8AQce6IJTFkR70QRspjzc7LuNZ1iD4Tk8IXq9nUkUNQqkF2UTr08j5q5Me8dQ36hQ59LjnFFSKJWf9OIQ";
+    public static string url = "https://localhost:8443/api";
+    public static string token = "";
+    public static string username = "";
 
     /// <summary>
     /// Асинхронный метод для получения списка записей
@@ -17,8 +18,6 @@ public class PlatformerApi : MonoBehaviour
     {
         using (UnityWebRequest request = UnityWebRequest.Get(url + "/record?level=" + level))
         {
-            request.SetRequestHeader("Authorization", "Bearer " + token);
-
             await SendRequestAsync(request);
 
             if (request.result == UnityWebRequest.Result.Success)
@@ -41,7 +40,7 @@ public class PlatformerApi : MonoBehaviour
     {
         string json = JsonUtility.ToJson(record);
 
-        using (UnityWebRequest request = new UnityWebRequest(url + "/record", "POST"))
+        using (UnityWebRequest request = new UnityWebRequest(url + "/record/save", "POST"))
         {
             request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json));
             request.downloadHandler = new DownloadHandlerBuffer();
@@ -113,6 +112,7 @@ public class PlatformerApi : MonoBehaviour
     /// </summary>
     public Task SendRequestAsync(UnityWebRequest request)
     {
+        request.certificateHandler = new DebugCertificateHandler();
         var taskCompletionSource = new TaskCompletionSource<bool>();
 
         var operation = request.SendWebRequest();
@@ -124,10 +124,21 @@ public class PlatformerApi : MonoBehaviour
             }
             else
             {
-                taskCompletionSource.TrySetException(new System.Exception(request.error));
+                string responseText = request.downloadHandler.text;
+                ErrorRequest errorDetails = JsonUtility.FromJson<ErrorRequest>(responseText);
+                taskCompletionSource.TrySetException(new Exception(errorDetails.message));
             }
         };
 
         return taskCompletionSource.Task;
     }
+
+    private class DebugCertificateHandler : CertificateHandler
+    {
+        protected override bool ValidateCertificate(byte[] certificateData)
+        {
+            return true;
+        }
+    }
+
 }
