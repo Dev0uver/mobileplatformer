@@ -56,7 +56,8 @@ public class PlatformerApi : MonoBehaviour
             }
             else
             {
-                throw new System.Exception($"Failed to send record: {request.error}");
+                Debug.LogWarning($"Failed to send record: {request.error}");
+                throw new Exception("Exception");
             }
         }
     }

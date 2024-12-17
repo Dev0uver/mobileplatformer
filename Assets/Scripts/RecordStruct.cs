@@ -8,6 +8,6 @@ public struct RecordStruct {
     public string nickname;
 
     public string toString() {
-        return $"ID = {id}, Time = {time}, Score = {score}, UserId = {userId}, Level = {level} Nickname = {nickname}";
+        return $"Nickname = {nickname}, Time = {time}, Score = {score}";
     }
 }
