@@ -140,5 +140,4 @@ public class PlatformerApi : MonoBehaviour
             return true;
         }
     }
-
 }
