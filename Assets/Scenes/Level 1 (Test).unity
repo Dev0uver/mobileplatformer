@@ -9421,6 +9421,7 @@ MonoBehaviour:
   pauseScreen: {fileID: 488662130}
   levelCompleteScreen: {fileID: 143237314}
   levelSelectionScreen: {fileID: 0}
+  recordScreen: {fileID: 0}
   levelPreviews: []
 --- !u!1 &1354215611
 GameObject:
