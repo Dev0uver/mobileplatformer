@@ -7,8 +7,8 @@ using UnityEngine.Networking;
 
 public class PlatformerApi : MonoBehaviour
 {
-    private static string url = "http://localhost:8080/api";
-    public static string token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBtYWlsLnJ1IiwiaWF0IjoxNzM0MTkzNjkyLCJleHAiOjE3MzY3ODU2OTJ9.u7uJn8AQce6IJTFkR70QRspjzc7LuNZ1iD4Tk8IXq9nUkUNQqkF2UTr08j5q5Me8dQ36hQ59LjnFFSKJWf9OIQ";
+    private static string url = "https://192.168.88.251:8443/api";
+    public static string token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MUBudWxsLmNvbSIsImlhdCI6MTczNDQ1NDYzOCwiZXhwIjoxNzM3MDQ2NjM4fQ.r9rHb1sauoK5m07LAYHH_yzUaVzDHS7XjkppcvBbhLk0D9Kmt0dOqT0TiNSjT_HokLQyUNb6A8shodyg_xe7wQ";
 
     /// <summary>
     /// Асинхронный метод для получения списка записей
@@ -113,6 +113,7 @@ public class PlatformerApi : MonoBehaviour
     /// </summary>
     public Task SendRequestAsync(UnityWebRequest request)
     {
+        request.certificateHandler = new DebugCertificateHandler();
         var taskCompletionSource = new TaskCompletionSource<bool>();
 
         var operation = request.SendWebRequest();
@@ -129,5 +130,13 @@ public class PlatformerApi : MonoBehaviour
         };
 
         return taskCompletionSource.Task;
+    }
+
+    private class DebugCertificateHandler : CertificateHandler
+    {
+        protected override bool ValidateCertificate(byte[] certificateData)
+        {
+            return true;
+        }
     }
 }
