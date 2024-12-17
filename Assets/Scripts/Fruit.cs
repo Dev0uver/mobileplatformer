@@ -13,6 +13,8 @@ public class Fruit : MonoBehaviour
     private int fruitId;
     private bool disappear = false;
 
+    private SoundPlayer soundPlayer;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -20,6 +22,8 @@ public class Fruit : MonoBehaviour
         System.Random rnd = new System.Random();
         fruitId  = rnd.Next(1, 9);
         animator.SetInteger("state", fruitId);
+
+        soundPlayer = FindObjectOfType<SoundPlayer>();
     }
 
     // Update is called once per frame
@@ -37,6 +41,7 @@ public class Fruit : MonoBehaviour
             Score.score += 1;
             animator.SetInteger("state", 0);
             spriteRenderer.sprite = null;
+            soundPlayer.PlayPickupSound(false);
         }
     }
 }

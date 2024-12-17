@@ -7,6 +7,7 @@ public class Finish : MonoBehaviour
     public static bool isClosed = true;
 
     private UIManager uiManager;
+    private SoundPlayer soundPlayer;
 
     private Animator animator;
     // Start is called before the first frame update
@@ -14,12 +15,14 @@ public class Finish : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         uiManager = FindObjectOfType<UIManager>();
+        soundPlayer = FindObjectOfType<SoundPlayer>();
     }
 
     public void OpenFinish()
     {
         isClosed = false;
         State = States.open;
+        soundPlayer.PlayFinishSound();
     }
 
     public void SetOpened()

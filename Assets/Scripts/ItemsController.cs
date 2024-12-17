@@ -8,9 +8,12 @@ public class ItemsController : MonoBehaviour
 
     private Finish finish;
 
+    private SoundPlayer soundPlayer;
+
     private void Start()
     {
         finish = FindObjectOfType<Finish>();
+        soundPlayer = FindObjectOfType<SoundPlayer>();
     }
 
     public void AddItem(Sprite sprite)
@@ -30,6 +33,7 @@ public class ItemsController : MonoBehaviour
         // Назначаем спрайт и увеличиваем индекс
         items[index].sprite = sprite;
         items[index].enabled = true;
+        soundPlayer.PlayPickupSound(true);
         index++;
 
         if (index >= 3 && Finish.isClosed)

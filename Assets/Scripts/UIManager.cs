@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject levelCompleteScreen;
     [SerializeField] private GameObject levelSelectionScreen;
     [SerializeField] private GameObject recordScreen;
+    [SerializeField] private GameObject BackgroundMusicPlayer;
 
     private int sceneCount;
 
@@ -19,6 +20,7 @@ public class UIManager : MonoBehaviour
     private Image image;
     private Text levelNumber;
     private Text levelNumberScore;
+    private AudioSource musicSrc;
 
     private List<Text> time = new List<Text>();
     private List<Text> score = new List<Text>();
@@ -28,6 +30,8 @@ public class UIManager : MonoBehaviour
 
     private static int index = 1;
     private int record = 1;
+
+    private string wikiUrl = "https://masterokk.github.io/----5/#/";
 
     async void Start()
     {
@@ -49,6 +53,10 @@ public class UIManager : MonoBehaviour
             levelSelectionScreen.SetActive(false);
             image = levelSelectionScreen.transform.GetChild(levelSelectionScreen.transform.childCount - 1).GetComponent<Image>();
             levelNumber = levelSelectionScreen.transform.GetChild(levelSelectionScreen.transform.childCount - 2).GetComponent<Text>();
+        }
+        if (BackgroundMusicPlayer)
+        {
+            musicSrc = BackgroundMusicPlayer.GetComponent<AudioSource>();
         }
         if (recordScreen)
         {
@@ -96,10 +104,16 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void OpenWiki()
+    {
+        Application.OpenURL(wikiUrl);
+    }
+
     #region GameOver
     public void GameOver()
     {
         gameOverScreen.SetActive(true);
+        StopMusic();
         Time.timeScale = 0;
     }
 
@@ -117,6 +131,7 @@ public class UIManager : MonoBehaviour
 
     private void ResetValues()
     {
+        StopMusic();
         Finish.isClosed = true;
         Score.score = 0;
         ItemsController.index = 0;
@@ -145,10 +160,12 @@ public class UIManager : MonoBehaviour
 
         if (status)
         {
+            PauseMusic();
             Time.timeScale = 0;
         }
         else
         {
+            PlayMusic();
             Time.timeScale = 1;
         }
     }
@@ -162,6 +179,7 @@ public class UIManager : MonoBehaviour
         timeValueText.text = Score.parseTime();
         scoreValueText.text = Score.score.ToString();
 
+        StopMusic();
         levelCompleteScreen.SetActive(true);
         Time.timeScale = 0;
         
@@ -300,5 +318,31 @@ public class UIManager : MonoBehaviour
             levelNumberScore.text = record.ToString();
         }
     }
-#endregion
+    #endregion
+
+    #region MusicControl
+    private void PlayMusic()
+    {
+        if (musicSrc)
+        {
+            musicSrc.Play();
+        }
+    }
+
+    private void PauseMusic()
+    {
+        if (musicSrc)
+        {
+            musicSrc.Pause();
+        }
+    }
+
+    private void StopMusic()
+    {
+        if (musicSrc)
+        {
+            musicSrc.Stop();
+        }
+    }
+    #endregion
 }
