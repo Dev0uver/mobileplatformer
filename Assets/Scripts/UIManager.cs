@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -13,6 +16,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject levelSelectionScreen;
     [SerializeField] private GameObject recordScreen;
     [SerializeField] private GameObject BackgroundMusicPlayer;
+    [SerializeField] private GameObject AuthObject;
+    [SerializeField] private GameObject RegisterObjectScene;
+    [SerializeField] private GameObject usernameObject;
+    [SerializeField] private GameObject exitObject;
+    [SerializeField] private GameObject authButton;
 
     private int sceneCount;
 
@@ -25,7 +33,6 @@ public class UIManager : MonoBehaviour
     private List<Text> time = new List<Text>();
     private List<Text> score = new List<Text>();
     private List<Text> nickname = new List<Text>();
-    
     private List<Text> place = new List<Text>();
 
     private static int index = 1;
@@ -39,6 +46,29 @@ public class UIManager : MonoBehaviour
         if (gameOverScreen)
         {
             gameOverScreen.SetActive(false);
+        }
+        if (AuthObject)
+        {
+            AuthObject.SetActive(false);
+        }
+        if (usernameObject)
+        {
+            if (PlatformerApi.username == "" && PlatformerApi.token == "") {
+                usernameObject.SetActive(false);
+                exitObject.SetActive(false);
+                authButton.SetActive(true);
+            } else {
+                usernameObject.GetComponent<Text>().text = $"Hello {PlatformerApi.username}!";
+                usernameObject.SetActive(true);
+                usernameObject.SetActive(true);
+                authButton.SetActive(false);
+            }
+        }
+        if (RegisterObjectScene)
+        {
+            RegisterObjectScene.SetActive(false);
+            Text error = RegisterObjectScene.transform.GetChild(RegisterObjectScene.transform.childCount - 4).GetComponent<Text>();
+            error.text = "";
         }
         if (pauseScreen)
         {
@@ -182,7 +212,9 @@ public class UIManager : MonoBehaviour
         StopMusic();
         levelCompleteScreen.SetActive(true);
         Time.timeScale = 0;
-        
+        if(PlatformerApi.token == "") {
+            return;
+        }
         string time = timeValueText.text.Length == 4 ? "0" + timeValueText.text : timeValueText.text;
         RecordStruct recordStruct = new RecordStruct();
         recordStruct.time = "00:" + time;
@@ -343,6 +375,119 @@ public class UIManager : MonoBehaviour
         {
             musicSrc.Stop();
         }
+    }
+    #endregion
+
+    #region Register
+    public void OpenRegisterSelection()
+    {
+        RegisterObjectScene.SetActive(true);
+    }
+
+    public void CloseRegisterSelection()
+    {
+        RegisterObjectScene.SetActive(false);
+        Text error = RegisterObjectScene.transform.GetChild(RegisterObjectScene.transform.childCount - 4).GetComponent<Text>();
+        error.text = "";
+    }
+
+    public async void MakeRegister() {
+        Text error = RegisterObjectScene.transform.GetChild(RegisterObjectScene.transform.childCount - 4).GetComponent<Text>();
+        string nickname = RegisterObjectScene.transform.GetChild(RegisterObjectScene.transform.childCount - 3).GetComponent<InputField>().textComponent.text;
+        string email = RegisterObjectScene.transform.GetChild(RegisterObjectScene.transform.childCount - 2).GetComponent<InputField>().textComponent.text;
+        string password = RegisterObjectScene.transform.GetChild(RegisterObjectScene.transform.childCount - 1).GetComponent<InputField>().textComponent.text;
+        RegisterRequest registerRequest = new RegisterRequest();
+        registerRequest.nickname = nickname;
+        registerRequest.email = email;
+        registerRequest.password = password;
+
+        string json = JsonUtility.ToJson(registerRequest);
+        UnityWebRequest request = new UnityWebRequest(PlatformerApi.url + "/security/register", "POST");
+        request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json));
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        try {
+            await platformerApi.SendRequestAsync(request);
+            Debug.Log("Success");
+            PlatformerApi.token = JsonUtility.FromJson<TokenRequest>(request.downloadHandler.text).token;
+            PlatformerApi.username = JsonUtility.FromJson<TokenRequest>(request.downloadHandler.text).nickname;
+            error.text = "";
+            Debug.Log("Token is " + PlatformerApi.token);
+
+            usernameObject.GetComponent<Text>().text = $"Hello {PlatformerApi.username}!";
+            usernameObject.SetActive(true);
+            exitObject.SetActive(true);
+            authButton.SetActive(false);
+            CloseAuthSelection();
+            CloseRegisterSelection();
+        } catch (Exception e) {
+            Debug.Log("Error -- " + e.Message);
+            error.text = e.Message;
+            PlatformerApi.token = "";
+            PlatformerApi.username = "";
+            usernameObject.SetActive(false);
+            exitObject.SetActive(false);
+            authButton.SetActive(true);
+        }
+    }
+
+    public void OpenAuthSelection()
+    {
+        AuthObject.SetActive(true);
+    }
+
+    public void CloseAuthSelection()
+    {
+        AuthObject.SetActive(false);
+        Text error = AuthObject.transform.GetChild(RegisterObjectScene.transform.childCount - 4).GetComponent<Text>();
+        error.text = "";
+    }
+
+    public async void MakeAuth() {
+        Text error = AuthObject.transform.GetChild(AuthObject.transform.childCount - 3).GetComponent<Text>();
+        string email = AuthObject.transform.GetChild(AuthObject.transform.childCount - 2).GetComponent<InputField>().textComponent.text;
+        string password = AuthObject.transform.GetChild(AuthObject.transform.childCount - 1).GetComponent<InputField>().textComponent.text;
+        AuthRequest authRequest = new AuthRequest();
+        authRequest.email = email;
+        authRequest.password = password;
+
+        string json = JsonUtility.ToJson(authRequest);
+        UnityWebRequest request = new UnityWebRequest(PlatformerApi.url + "/security/login", "POST");
+        request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json));
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        try {
+            await platformerApi.SendRequestAsync(request);
+            Debug.Log("Success");
+            PlatformerApi.token = JsonUtility.FromJson<TokenRequest>(request.downloadHandler.text).token;
+            PlatformerApi.username = JsonUtility.FromJson<TokenRequest>(request.downloadHandler.text).nickname;
+            error.text = "";
+            Debug.Log("Token is " + PlatformerApi.token);
+            usernameObject.GetComponent<Text>().text = $"Hello {PlatformerApi.username}!";
+            usernameObject.SetActive(true);
+            exitObject.SetActive(true);
+            authButton.SetActive(false);
+            CloseAuthSelection();
+        } catch (Exception e) {
+            Debug.Log("Auth Error -- " + e.Message);
+            error.text = e.Message;
+            PlatformerApi.token = "";
+            PlatformerApi.username = "";
+            usernameObject.SetActive(false);
+            exitObject.SetActive(false);
+            authButton.SetActive(true);
+        }
+    }
+
+    public void Exit() {
+        Debug.Log("Exit");
+        PlatformerApi.token = "";
+        PlatformerApi.username = "";
+        usernameObject.SetActive(false);
+        exitObject.SetActive(false);
+        authButton.SetActive(true);
     }
     #endregion
 }

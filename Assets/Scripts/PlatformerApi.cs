@@ -7,8 +7,9 @@ using UnityEngine.Networking;
 
 public class PlatformerApi : MonoBehaviour
 {
-    private static string url = "https://192.168.88.251:8443/api";
-    public static string token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MUBudWxsLmNvbSIsImlhdCI6MTczNDQ1NDYzOCwiZXhwIjoxNzM3MDQ2NjM4fQ.r9rHb1sauoK5m07LAYHH_yzUaVzDHS7XjkppcvBbhLk0D9Kmt0dOqT0TiNSjT_HokLQyUNb6A8shodyg_xe7wQ";
+    public static string url = "https://localhost:8443/api";
+    public static string token = "";
+    public static string username = "";
 
     /// <summary>
     /// Асинхронный метод для получения списка записей
@@ -17,8 +18,6 @@ public class PlatformerApi : MonoBehaviour
     {
         using (UnityWebRequest request = UnityWebRequest.Get(url + "/record?level=" + level))
         {
-            request.SetRequestHeader("Authorization", "Bearer " + token);
-
             await SendRequestAsync(request);
 
             if (request.result == UnityWebRequest.Result.Success)
@@ -41,7 +40,7 @@ public class PlatformerApi : MonoBehaviour
     {
         string json = JsonUtility.ToJson(record);
 
-        using (UnityWebRequest request = new UnityWebRequest(url + "/record", "POST"))
+        using (UnityWebRequest request = new UnityWebRequest(url + "/record/save", "POST"))
         {
             request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json));
             request.downloadHandler = new DownloadHandlerBuffer();
@@ -125,7 +124,9 @@ public class PlatformerApi : MonoBehaviour
             }
             else
             {
-                taskCompletionSource.TrySetException(new System.Exception(request.error));
+                string responseText = request.downloadHandler.text;
+                ErrorRequest errorDetails = JsonUtility.FromJson<ErrorRequest>(responseText);
+                taskCompletionSource.TrySetException(new Exception(errorDetails.message));
             }
         };
 
