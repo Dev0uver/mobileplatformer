@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 
 public class PlatformerApi : MonoBehaviour
 {
-    public static string url = "https://localhost:8443/api";
+    public static string url = "https://192.168.88.251:8443/api";
     public static string token = "";
     public static string username = "";
 
