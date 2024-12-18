@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "D:\\Projects\\Unity projects\\mobileplatformer\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9A4FD264-0E17-0F2D-A416-462FA4B54582}|Assembly-CSharp.csproj|D:\\Projects\\Unity projects\\mobileplatformer\\assets\\scripts\\hero.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9A4FD264-0E17-0F2D-A416-462FA4B54582}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\hero.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{9A4FD264-0E17-0F2D-A416-462FA4B54582}|Assembly-CSharp.csproj|d:\\projects\\unity projects\\mobileplatformer\\assets\\scripts\\platformerapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9A4FD264-0E17-0F2D-A416-462FA4B54582}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\platformerapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A4FD264-0E17-0F2D-A416-462FA4B54582}|Assembly-CSharp.csproj|d:\\projects\\unity projects\\mobileplatformer\\assets\\scripts\\hero.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A4FD264-0E17-0F2D-A416-462FA4B54582}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\hero.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9A4FD264-0E17-0F2D-A416-462FA4B54582}|Assembly-CSharp.csproj|D:\\Projects\\Unity projects\\mobileplatformer\\assets\\scripts\\authstructure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -31,7 +31,7 @@
       "RelativeMoniker": "D:0:0:{9A4FD264-0E17-0F2D-A416-462FA4B54582}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\score.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9A4FD264-0E17-0F2D-A416-462FA4B54582}|Assembly-CSharp.csproj|d:\\projects\\unity projects\\mobileplatformer\\assets\\scripts\\finish.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9A4FD264-0E17-0F2D-A416-462FA4B54582}|Assembly-CSharp.csproj|D:\\Projects\\Unity projects\\mobileplatformer\\assets\\scripts\\finish.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9A4FD264-0E17-0F2D-A416-462FA4B54582}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\finish.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -70,13 +70,13 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "PlatformerApi.cs",
               "DocumentMoniker": "D:\\Projects\\Unity projects\\mobileplatformer\\Assets\\Scripts\\PlatformerApi.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\PlatformerApi.cs",
               "ToolTip": "D:\\Projects\\Unity projects\\mobileplatformer\\Assets\\Scripts\\PlatformerApi.cs",
               "RelativeToolTip": "Assets\\Scripts\\PlatformerApi.cs",
-              "ViewState": "AgIAAGIAAAAAAAAAAAAIwG0AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwAkAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-17T16:51:45.576Z",
               "EditorCaption": ""
@@ -197,7 +197,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Hero.cs",
               "DocumentMoniker": "D:\\Projects\\Unity projects\\mobileplatformer\\Assets\\Scripts\\Hero.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Hero.cs",
@@ -242,8 +242,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Finish.cs",
               "ViewState": "AgIAAA0AAAAAAAAAAAA1wBEAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-15T13:02:06.555Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-15T13:02:06.555Z"
             }
           ]
         }
